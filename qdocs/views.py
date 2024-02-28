@@ -93,7 +93,7 @@ class FileUploadView(LoginRequiredMixin, View):
         return render(request, self.get_template_name(), context)
     
     def post(self, request, *args, **kwargs):
-        files = request.FILES.getlist('files')
+        files = request.FILES.getlist('files') or request.FILES.getlist('upload')
         tokens = []
         for file in files:
             form = self.form_class(data=request.POST, files={'upload': file})
